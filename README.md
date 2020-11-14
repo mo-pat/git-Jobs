@@ -1,5 +1,5 @@
 # git-Jobs
-A python app that will store and print out the latest jobs posted that day on indeed.com. 
+A python app that will store and print out the latest jobs posted that day on indeed.com. This project is more of a test project to get familiar with web scrapping and how to gather information from HTML.
 
 ## Getting Started
 1. To run the program, enter <code>python3 main.py</code>. Currently this runs only with python3

@@ -3,11 +3,17 @@ from bs4 import BeautifulSoup
 import re
 import math
 
-URL = 'https://ca.indeed.com/jobs?q=software+developer&l=Montr%C3%A9al%2C+QC&fromage=1'
+## Ask for job title from user
+print('---gitJobs---')
+job_search_title = input('Enter job search parameter: ').lower().split(" ")
+jobURL = '+'.join(job_search_title)
+
+URL = 'https://ca.indeed.com/jobs?q={}&l=Montr%C3%A9al%2C+QC&fromage=1'.format(jobURL)
+print(URL)
 root_url = 'https://ca.indeed.com'
 
 ## TODO: Get location of users request (currently fixed for 'Montreal, QC')
-## TODO: Request different job titles (currently fixed for 'Software Developer')
+
 # Get total number of pagination (iteration count)
 getPage = requests.get(URL)
 getSoup = BeautifulSoup(getPage.content, 'html.parser')

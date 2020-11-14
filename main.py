@@ -6,8 +6,8 @@ import math
 URL = 'https://ca.indeed.com/jobs?q=software+developer&l=Montr%C3%A9al%2C+QC&fromage=1'
 root_url = 'https://ca.indeed.com'
 
-## TODO: Get location of users request
-
+## TODO: Get location of users request (currently fixed for 'Montreal, QC')
+## TODO: Request different job titles (currently fixed for 'Software Developer')
 # Get total number of pagination (iteration count)
 getPage = requests.get(URL)
 getSoup = BeautifulSoup(getPage.content, 'html.parser')

@@ -89,7 +89,7 @@ count = 0
 ## print all jobs
 for jobs in jobListings:
   count+=1
-  print('job: ' + str(count))
+  print('Job#: ' + str(count))
   print(jobs['title'])
   print(jobs['company'])
   print(jobs['location'])

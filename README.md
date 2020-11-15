@@ -2,7 +2,7 @@
 A python app that will store and print out the latest jobs posted that day on indeed.com. This project is more of a test project to get familiar with web scraping and how to gather information from HTML.
 
 ## Getting Started
-1. Install dependency(s): <code>pip install -r requirements.txt</code>
+1. Install dependencies: <code>pip install -r requirements.txt</code>
 
 2. To run the program, enter <code>python3 main.py</code>. Currently this runs only with python3
 

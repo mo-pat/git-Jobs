@@ -3,13 +3,23 @@ from bs4 import BeautifulSoup
 import re
 import math
 
+# Get user's position (city and province/state)
+location_response = requests.get('http://ipinfo.io/json').json()
+# store user city and province/state
+# City (ex: 'Montreal')
+user_city = location_response['city']
+# State/Province (ex: 'Quebec')
+user_region = location_response['region']
+
 ## Ask for job title from user
-print('---gitJobs---')
+print('---gitJobs from Indeed---')
 job_search_title = input('Enter job search parameter: ').lower().split(" ")
 jobURL = '+'.join(job_search_title)
+print('Location: ' + str(user_city) + ', ' + str(user_region))
 
-URL = 'https://ca.indeed.com/jobs?q={}&l=Montr%C3%A9al%2C+QC&fromage=1'.format(jobURL)
-print(URL)
+# Indeed URL with job title, user city and province as query parameters
+URL = 'https://ca.indeed.com/jobs?q={}&l={}%2C+{}&fromage=1'.format(jobURL, user_city, user_region)
+print('URL: ' + str(URL))
 root_url = 'https://ca.indeed.com'
 
 ## TODO: Get location of users request (currently fixed for 'Montreal, QC')

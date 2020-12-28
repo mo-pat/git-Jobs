@@ -19,11 +19,12 @@ print('Location: ' + str(user_city) + ', ' + str(user_region))
 
 # Indeed URL with job title, user city and province as query parameters
 # https://www.monster.ca/jobs/search/?q=Software-Developer&intcid=skr_navigation_nhpso_searchMain&where=Montreal__2c-QC&rad=20&tm=0
-URL = 'https://ca.indeed.com/jobs?q={}&l={}%2C+{}&fromage=1'.format(jobURL, user_city, user_region)
+# URL = 'https://ca.indeed.com/jobs?q={}&l={}%2C+{}&fromage=1'.format(jobURL, user_city, user_region)
+URL = "https://www.monster.ca/jobs/search/?q={}&where={}".format(jobURL, user_city)
 print('URL: ' + str(URL))
-root_url = 'https://ca.indeed.com'
+root_url = 'https://www.monster.ca/'
 
-## TODO: Get location of users request (currently fixed for 'Montreal, QC')
+
 
 # Get total number of pagination (iteration count)
 getPage = requests.get(URL)

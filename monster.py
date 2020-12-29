@@ -36,7 +36,7 @@ getSearchResults = soup.find_all(class_="card-content")
 # print(getSearchResults)
 
 for cards in getSearchResults:
-  title = cards.find('a').getText()
+  title = cards.find('a')
   print(title)
 
 exit()

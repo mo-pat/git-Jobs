@@ -32,11 +32,16 @@ page = requests.get(URL)
 print('status code: ' + str(page.status_code))
 
 soup = BeautifulSoup(page.content, 'html.parser')
-getSearchResults = soup.find_all(class_="card-content")
+getSearchResults = soup.find_all('section', class_='card-content')
 # print(getSearchResults)
 
 for cards in getSearchResults:
-  title = cards.find('a')
-  print(title)
+  title = cards.find('h2', class_='title')
+  company = cards.find('span', class_='name')
+  if None in (title, company):
+    continue
+  print(title.text.strip())
+  print(company.text.strip())
+  print()
 
 exit()

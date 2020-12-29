@@ -31,6 +31,7 @@ jobListings = []
 # Request URL
 page = requests.get(URL)
 print('status code: ' + str(page.status_code))
+print('---')
 
 soup = BeautifulSoup(page.content, 'html.parser')
 getSearchResults = soup.find_all('section', class_='card-content')
@@ -40,12 +41,35 @@ for cards in getSearchResults:
   title = cards.find('h2', class_='title')
   company = cards.find('span', class_='name')
   location = cards.find('div', class_='location')
+  path = cards.find('a')
 
   if None in (title, company, location):
     continue
-  print(title.text.strip())
-  print(company.text.strip())
-  print(location.text.strip())
+
+  job = {
+    "title": title.text.strip(),
+    "company": company.text.strip(),
+    "location": location.text.strip(),
+    "job_URL": path['href'].strip()
+  }
+
+  jobListings.append(job)
+
+  #print(title.text.strip())
+  #print(company.text.strip())
+  #print(location.text.strip())
+  #print(path['href'].strip())
+  #print()
+
+count = 0
+## print all jobs
+for jobs in jobListings:
+  count+=1
+  print('Job#: ' + str(count))
+  print(jobs['title'])
+  print(jobs['company'])
+  print(jobs['location'])
+  print(jobs['job_URL'])
   print()
 
-exit()
+

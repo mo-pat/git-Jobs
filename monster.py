@@ -20,7 +20,8 @@ print('Location: ' + str(user_city) + ', ' + str(user_region))
 # Indeed URL with job title, user city and province as query parameters
 # https://www.monster.ca/jobs/search/?q=Software-Developer&intcid=skr_navigation_nhpso_searchMain&where=Montreal__2c-QC&rad=20&tm=0
 # URL = 'https://ca.indeed.com/jobs?q={}&l={}%2C+{}&fromage=1'.format(jobURL, user_city, user_region)
-URL = "https://www.monster.ca/jobs/search/?q={}&where={}".format(jobURL, user_city)
+#https://www.monster.ca/jobs/search/?q=Software-Engineer&where=Montreal&rad=50&tm=1
+URL = "https://www.monster.ca/jobs/search/?q={}&where={}&rad=50&tm=0".format(jobURL, user_city)
 print('URL: ' + str(URL))
 root_url = 'https://www.monster.ca/'
 
@@ -38,10 +39,13 @@ getSearchResults = soup.find_all('section', class_='card-content')
 for cards in getSearchResults:
   title = cards.find('h2', class_='title')
   company = cards.find('span', class_='name')
-  if None in (title, company):
+  location = cards.find('div', class_='location')
+
+  if None in (title, company, location):
     continue
   print(title.text.strip())
   print(company.text.strip())
+  print(location.text.strip())
   print()
 
 exit()

@@ -4,7 +4,7 @@ import re
 import math
 
 def getMonster(job_title, city, region):
-  ## Ask for job title from user
+  
   print('---gitJobs from Monster---')
   jobURL = '-'.join(job_title)
 
@@ -48,6 +48,7 @@ def getMonster(job_title, city, region):
   return jobListings
 
 
+## FOR DEBUGGING
 # getTitle = input('Enter job search parameter: ').lower().split(" ")
 # test = getMonster(getTitle, 'Montréal', 'QC')
 # print(test)

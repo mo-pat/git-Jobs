@@ -28,6 +28,13 @@ root_url = 'https://ca.indeed.com'
 getPage = requests.get(URL)
 getSoup = BeautifulSoup(getPage.content, 'html.parser')
 getCount = getSoup.find(id='searchCountPages')
+
+## Check if no search count is available, indicating no search results were found
+## Return nothing
+if getCount is None:
+  print('Sorry, no jobs found on Indeed')
+  exit()
+
 # Grab numbers from new jobs string
 paginationCount = re.findall(r'\b\d+\b', getCount.text)
 

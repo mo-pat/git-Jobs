@@ -3,6 +3,7 @@ import re
 import math
 
 import testImport as monster
+import test_indeed as indeed
 
 # jobs = monster.getMonster()
 
@@ -23,6 +24,10 @@ job_search_title = input('Enter job search parameter: ').lower().split(" ")
 jobs_monster = monster.getMonster(job_search_title, user_city, user_region)
 
 ## Get jobs from indeed
+jobs_indeed = indeed.getIndeed(job_search_title, user_city, user_region)
 
-print(jobs_monster)
+print()
+print('jobs from monster: ', jobs_monster)
+print('----')
+print('jobs from indeed: ', jobs_indeed)
 

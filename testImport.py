@@ -3,26 +3,13 @@ from bs4 import BeautifulSoup
 import re
 import math
 
-def getMonster():
-  # Get user's position (city and province/state)
-  location_response = requests.get('http://ipinfo.io/json').json()
-  # store user city and province/state
-  # City (ex: 'Montreal')
-  user_city = location_response['city']
-  # State/Province (ex: 'Quebec')
-  user_region = location_response['region']
-
+def getMonster(job_title, city, region):
   ## Ask for job title from user
   print('---gitJobs from Monster---')
-  job_search_title = input('Enter job search parameter: ').lower().split(" ")
-  jobURL = '-'.join(job_search_title)
-  print('Location: ' + str(user_city) + ', ' + str(user_region))
+  jobURL = '-'.join(job_title)
 
-  # Indeed URL with job title, user city and province as query parameters
-  # https://www.monster.ca/jobs/search/?q=Software-Developer&intcid=skr_navigation_nhpso_searchMain&where=Montreal__2c-QC&rad=20&tm=0
-  # URL = 'https://ca.indeed.com/jobs?q={}&l={}%2C+{}&fromage=1'.format(jobURL, user_city, user_region)
-  #https://www.monster.ca/jobs/search/?q=Software-Engineer&where=Montreal&rad=50&tm=1
-  URL = "https://www.monster.ca/jobs/search/?q={}&where={}&rad=50&tm=0".format(jobURL, user_city)
+  ## Add query string to request URL to get job postings
+  URL = "https://www.monster.ca/jobs/search/?q={}&where={}&rad=50&tm=0".format(jobURL, city)
   print('URL: ' + str(URL))
   root_url = 'https://www.monster.ca/'
 
@@ -36,7 +23,6 @@ def getMonster():
 
   soup = BeautifulSoup(page.content, 'html.parser')
   getSearchResults = soup.find_all('section', class_='card-content')
-  # print(getSearchResults)
 
   for cards in getSearchResults:
     title = cards.find('h2', class_='title')
@@ -60,3 +46,8 @@ def getMonster():
 
   # Return job listings
   return jobListings
+
+
+# getTitle = input('Enter job search parameter: ').lower().split(" ")
+# test = getMonster(getTitle, 'Montréal', 'QC')
+# print(test)

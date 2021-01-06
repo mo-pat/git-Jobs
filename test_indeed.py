@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import math
+import hashlib
 
 def getIndeed(job_title, city, region):
 
@@ -76,6 +77,10 @@ def getIndeed(job_title, city, region):
       location = cards.find('div', class_='sjcl').find(class_='location')
       path = cards.find('a', class_='jobtitle turnstileLink').get('href')
       full_path = root_url + path
+      # Include a hash ID that will be parsed using the job title + company name
+      # hash_string: "Job Title" + "Company Name"
+      hash_string = title.text.strip() + " " + company.text.strip()
+      hash_id = hashlib.md5(hash_string.encode('utf-8')).hexdigest()
 
       #print(title.text.strip())
       #print(company.text.strip())
@@ -83,6 +88,7 @@ def getIndeed(job_title, city, region):
       #print(full_path)
 
       job = {
+        "hash_id": hash_id,
         "title": title.text.strip(),
         "company": company.text.strip(),
         "location": location.text.strip(),
@@ -95,6 +101,9 @@ def getIndeed(job_title, city, region):
   return jobListings
 
 ## FOR DEBUGGING
-# title = input('Enter job search parameter: ').lower().split(" ")
-# test = getIndeed(title, 'Montréal', 'QC')
-# print(test)
+title = input('Enter job search parameter: ').lower().split(" ")
+test = getIndeed(title, 'Montréal', 'QC')
+
+for job in test:
+  print(job)
+  print()

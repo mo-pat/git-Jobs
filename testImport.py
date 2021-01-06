@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import math
+import hashlib
 
 def getMonster(job_title, city, region):
-  
+
   print('---gitJobs from Monster---')
   jobURL = '-'.join(job_title)
 
@@ -34,7 +35,13 @@ def getMonster(job_title, city, region):
     if None in (title, company, location):
       continue
 
+    # Include a hash ID that will be parsed using the job title + company name
+    # hash_string: "Job Title" + "Company Name"
+    hash_string = title.text.strip() + " " + company.text.strip()
+    hash_id = hashlib.md5(hash_string.encode('utf-8')).hexdigest()
+
     job = {
+      "hash_id": hash_id,
       "title": title.text.strip(),
       "company": company.text.strip(),
       "location": location.text.strip(),
@@ -49,6 +56,9 @@ def getMonster(job_title, city, region):
 
 
 ## FOR DEBUGGING
-# getTitle = input('Enter job search parameter: ').lower().split(" ")
-# test = getMonster(getTitle, 'Montréal', 'QC')
-# print(test)
+getTitle = input('Enter job search parameter: ').lower().split(" ")
+test = getMonster(getTitle, 'Montréal', 'QC')
+
+for job in test:
+  print(job)
+  print()

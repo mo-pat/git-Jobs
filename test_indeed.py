@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import math
 import hashlib
+import json
 
 def getIndeed(job_title, city, region):
 
@@ -101,9 +102,15 @@ def getIndeed(job_title, city, region):
   return jobListings
 
 ## FOR DEBUGGING
-title = input('Enter job search parameter: ').lower().split(" ")
-test = getIndeed(title, 'Montréal', 'QC')
+# title = input('Enter job search parameter: ').lower().split(" ")
+# test = getIndeed(title, 'Montréal', 'QC')
 
-for job in test:
-  print(job)
-  print()
+# for job in test:
+#   print(job)
+#   print()
+
+
+# json_object = json.dumps(test, indent=4)
+
+# with open("sample_inded.json", "w") as outfile:
+#   outfile.write(json_object)
